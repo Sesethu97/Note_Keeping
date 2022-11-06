@@ -9,6 +9,10 @@ from .forms import NoteCreationForm,NoteUpdateForm,AccountSettingsForm
 def index(request):
     return  render(request,'notes/index.html')
 
+def home(request):
+        # if request.method == "POST":
+
+    return  render(request,'notes/home.html')
 
 def register(request):
     form=UserCreationForm()
@@ -28,7 +32,7 @@ def register(request):
     return render(request,'notes/register.html',context)
 
 
-def home_page(request):
+def add(request):
     notes=Note.objects.all()
     form=NoteCreationForm()
 
@@ -40,13 +44,13 @@ def home_page(request):
             note_obj.author=request.user
             note_obj.save()
 
-            return redirect('notes:home_page')
+            return redirect('notes:home')
 
     context={
         'notes':notes,
         'form':form
     }
-    return render(request,'notes/home.html',context)
+    return render(request,'notes/add.html',context)
 
 def settings(request):
     
@@ -68,10 +72,10 @@ def settings(request):
         'form':form,
         'user':user
     }
-    return render(request,'notes/settings.html',context)
+    return render(request,'notes/setting.html',context)
 
-def loggedout(request):
-    return render(request,'notes/loggedout.html')
+def logout(request):
+    return render(request,'notes/logout.html')
 
 def update(request,id):
     note_to_update=Note.objects.get(id=id)
@@ -86,7 +90,7 @@ def update(request,id):
 
             note_to_update.save()
 
-            return redirect('notes:home_page')
+            return redirect('notes:home')
 
     context={
         'note':note_to_update,
@@ -99,5 +103,5 @@ def delete(request,id):
 
     note_to_delete.delete()
 
-    return redirect('notes:home_page')
+    return redirect('notes:home')
 

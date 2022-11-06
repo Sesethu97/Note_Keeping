@@ -1,40 +1,31 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% load tailwind_filters %}
-{% block body %}
-    
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% load tailwind_filters
+%} {% block body %}
 
-    
-    <div class="container">
-        <br>
-        <h1>Recent Notes</h1>
-        <div class="notes">
-            
-            {% for note in notes %}
-            <div class="note">
-                <h2 class="text-info">{{note.title}}</h2>
-                <p>{{note.description}}</p>
-                <div class="options">
-                    <a href="/update/{{note.id}}/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Update</a>
-                    <a href="/delete/{{note.id}}/" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Delete</a>
-                </div>
-            </div>
-            {% endfor %}
-                
-        </div>
+<div class="flex flex-col items-center h-100vh  mt-9">
+  <br />
+  <h1>Recent Notes</h1>
+  <div class="p-20">
+    {% for note in notes %}
+    <div class="p-10 border-2 border-black-600">
+      <h2 class="font-medium leading-tight text-2xl text-black-600 mr-3 mb-3">
+        {{note.title}}
+      </h2>
+      <p class="mb-3">{{note.description}}</p>
+      <div class="options">
+        <a
+          href="/update/{{note.id}}/"
+          class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4"
+          >Update</a
+        >
+        <a
+          href="/delete/{{note.id}}/"
+          class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4"
+          >Delete</a
+        >
+      </div>
     </div>
-    <div class="add-modal" id="add-modal">
-        <div class="form">
-            <form action="" method="post">
-                {% csrf_token %}
-                <h3>Add Note</h3>
-               {{form |crispy}}
-                <div class="form-group">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Save</button>
-                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onclick="closeModal('add-modal')">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    {% endblock body %}
-   
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock body %}
