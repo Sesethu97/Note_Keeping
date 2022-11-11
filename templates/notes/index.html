@@ -2,15 +2,20 @@
 
 {% extends 'base.html' %}
 {% block body%}
-    <section class="py-5 mt-9 text-center container">
+    <section class="py-5 mt-9 text-center ">
+      
+
       <div class="row py-lg-5">
+    
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="
-           fw-light mt-9 font-medium text-lg">Personal Notes</h1>
-          <p class="lead text-muted mt-2">This is a website built with Python and Django  designed to make, update and delete notes</p>
+           fw-light mt-9 font-serif font-bold text-lg">Personal Notes</h1>
+          <p class="lead font-serif text-muted mt-6">This is a website built with Python and Django</p>
+          <p class="lead font-serif text-muted mt-2">Why buy a notebook when you can just use your phone to keep notes?</p>
+
           <p  class="mt-4">
-            <a href="{% url 'notes:register' %}" class="bg-gray-900 hover:bg-gray-500 text-white font-bold py-2 px-4" type="button">Create an account</a>
-            <a href="{% url 'notes:login' %}" class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4" type="button">Login</a>
+            <a href="{% url 'notes:register' %}" class="bg-black font-serif hover:bg-black text-white font-bold py-2 px-4" type="button">Create an account</a>
+            <a href="{% url 'notes:login' %}" class="bg-black font-serif hover:bg-black text-white font-bold py-2 px-4" type="button">Login</a>
           </p>
         </div>
       </div>

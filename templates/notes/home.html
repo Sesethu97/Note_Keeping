@@ -1,25 +1,33 @@
 {% extends 'base.html' %} {% load crispy_forms_tags %} {% load tailwind_filters
 %} {% block body %}
 
+
+
 <div class="flex flex-col items-center h-100vh  mt-9">
   <br />
-  <h1>Recent Notes</h1>
+  <h1 class="fw-light text-center mt-6 font-serif font-bold text-lg"">Recent Notes</h1>
   <div class="p-20">
+    <div class="grid grid-cols-4 gap-4 auto-cols-min">
+    
     {% for note in notes %}
-    <div class="p-10 border-2 border-black-600">
-      <h2 class="font-medium leading-tight text-2xl text-black-600 mr-3 mb-3">
-        {{note.title}}
+    <div class="p-10 shadow-md border-2 border-black-600">
+      <span class="material-icons-outlined">
+        star
+        </span>
+      <h2 class="font-serif font-medium leading-tight text-2xl text-black-600 mr-3 mb-3">
+        <a           href="/details/{{note.id}}/"
+        >{{note.title}}</a>
       </h2>
-      <p class="mb-3">{{note.description}}</p>
+      <p class="mb-3 font-serif">{{note.description}}</p>
       <div class="options">
         <a
           href="/update/{{note.id}}/"
-          class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4"
+          class="bg-black font-serif hover:hover:bg-black text-white font-bold py-2 px-4"
           >Update</a
         >
         <a
           href="/delete/{{note.id}}/"
-          class="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4"
+          class="bg-black font-serif hover:hover:bg-black text-white font-bold py-2 px-4"
           >Delete</a
         >
       </div>

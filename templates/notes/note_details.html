@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+{% block body %}    
+    <div class="flex flex-col items-center h-100vh  mt-9">
+
+            <h3 class="fw-light text-gray-900 mt-9 font-bold text-lg">Note</h3>
+
+            <h4>{{ notes.title }}</h4>
+            <p>{{ notes.description }}</p>
+
+        
+        
+    </div>
+
+{% endblock body %}
