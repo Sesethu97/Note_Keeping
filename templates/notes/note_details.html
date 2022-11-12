@@ -1,16 +1,25 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% load tailwind_filters %}
-{% block body %}    
-    <div class="flex flex-col items-center h-100vh  mt-9">
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% load tailwind_filters
+%} {% block body %}
+<div class="flex flex-col items-center h-100vh mt-9">
+  <div class="p-20">
+    <div class="p-10 shadow-md border-2 border-black-600">
 
-            <h3 class="fw-light text-gray-900 mt-9 font-bold text-lg">Note</h3>
+  {% if is_important %}
 
-            <h4>{{ notes.title }}</h4>
-            <p>{{ notes.description }}</p>
+    <a href="/important/{{note.id}}/">
+      <span class="material-icons"> star </span>
+    </a>
+    {% else %}
+    <a href="/important/{{note.id}}/">
+      <span class="material-icons-outlined"> star_outline </span>
+    </a>
+    {% endif %}
 
-        
-        
-    </div>
+    <h4 class="font-serif font-medium leading-tight text-2xl text-black-600 mr-3 mb-3">{{ notes.title }}</h4>
+    <p class="mb-3 font-serif">{{ notes.description }}</p>
+    
+ 
+  </div>
+</div>
 
 {% endblock body %}

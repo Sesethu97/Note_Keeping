@@ -18,11 +18,9 @@ urlpatterns = [
     ),
     path("home/", views.home, name="home"),
     path("update/<int:id>/", views.update, name="update"),
-    path("important/<int:id>/", views.important, name="important"),
     path("details/<int:id>/", views.note_details, name="details"),
-
-
-
+    path("importantId/<int:id>/", views.important, name="important_id"),
+    path("important_note/", views.important_note, name="important_note"),
 
     path("add/", views.add, name="add"),
     path("register/", views.register, name="register"),

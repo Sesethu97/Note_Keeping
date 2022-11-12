@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% load tailwind_filters
+%} {% block body %}
+<div class="flex flex-col items-center h-100vh mt-9">
+  <div class="p-20">
+    <h3 class="fw-light text-center mt-6 font-serif font-bold text-xl">
+      important
+    </h3>
+    <div class="p-10 shadow-md border-2 border-black-600">
+      
+      {% for note in importance %}
+      <h4
+        class="font-serif font-medium leading-tight text-center text-2xl text-black-600 mr-3 mb-3"
+      >
+        {{ notes.title }}
+      </h4>
+      <p class="mb-3 font-serif">{{ notes.description }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

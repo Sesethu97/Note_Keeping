@@ -5,16 +5,23 @@
 
 <div class="flex flex-col items-center h-100vh  mt-9">
   <br />
-  <h1 class="fw-light text-center mt-6 font-serif font-bold text-lg"">Recent Notes</h1>
+  <h1 class="fw-light text-center mt-6 font-serif font-bold text-xl">Recent Notes</h1>
   <div class="p-20">
     <div class="grid grid-cols-4 gap-4 auto-cols-min">
     
     {% for note in notes %}
     <div class="p-10 shadow-md border-2 border-black-600">
-      <span class="material-icons-outlined">
-        star
-        </span>
-      <h2 class="font-serif font-medium leading-tight text-2xl text-black-600 mr-3 mb-3">
+      {% if is_important %}
+
+      <a href="/important/{{note.id}}/">
+        <span class="material-icons ml-20 "> star </span>
+      </a>
+      {% else %}
+      <a href="/important/{{note.id}}/">
+        <span class="material-icons-outlined"> star_outline </span>
+      </a>
+      {% endif %}
+      <h2 class="font-serif font-medium leading-tight text-center text-2xl text-black-600 mr-3 mb-3">
         <a           href="/details/{{note.id}}/"
         >{{note.title}}</a>
       </h2>

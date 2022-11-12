@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "notes",
     "crispy_forms",
     "crispy_tailwind",
+    "account",
 ]
 
 MIDDLEWARE = [
