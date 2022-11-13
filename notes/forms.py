@@ -6,13 +6,13 @@ from django.contrib.auth.forms import UserCreationForm
 class NoteCreationForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ["title", "description"]
+        fields = ["title", "description", "draft", "saved"]
 
 
 class NoteUpdateForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ["title", "description"]
+        fields = ["title", "description", "draft", "saved"]
 
 class AccountSettingsForm(UserCreationForm):
     username = forms.CharField(label='username', min_length=5, max_length=150)  

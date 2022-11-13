@@ -3,23 +3,33 @@
 <div class="flex flex-col items-center h-100vh mt-9">
   <div class="p-20">
     <div class="p-10 shadow-md border-2 border-black-600">
+      <div class="mb-5">
+        {% if is_important %}
 
-  {% if is_important %}
+        <a href="/important/{{note.id}}/">
+          <span class="material-icons"> star </span>
+        </a>
+        {% else %}
+        <a href="/important/{{note.id}}/">
+          <span class="material-icons-outlined"> star_outline </span>
+        </a>
+        {% endif %}
+      </div>
+      <div class="mb-5">
+        {% if notes.draft %}
+        <h8 class="text-xs font-serif mr-5">Draft</h8>
+        {% endif %} 
+          <h9 class="text-xs font-serif ">{{notes.saved}}</h9>
+      </div>
 
-    <a href="/important/{{note.id}}/">
-      <span class="material-icons"> star </span>
-    </a>
-    {% else %}
-    <a href="/important/{{note.id}}/">
-      <span class="material-icons-outlined"> star_outline </span>
-    </a>
-    {% endif %}
-
-    <h4 class="font-serif font-medium leading-tight text-2xl text-black-600 mr-3 mb-3">{{ notes.title }}</h4>
-    <p class="mb-3 font-serif">{{ notes.description }}</p>
-    
- 
+      <h4
+        class="font-serif font-medium leading-tight text-2xl text-black-600 mr-3 mb-3"
+      >
+        {{ notes.title }}
+      </h4>
+      <p class="mb-3 foFnt-serif text-center mt-5">{{ notes.description }}</p>
+    </div>
   </div>
-</div>
 
-{% endblock body %}
+  {% endblock body %}
+</div>

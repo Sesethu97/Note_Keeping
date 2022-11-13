@@ -15,7 +15,7 @@ def index(request):
 
 def home(request):
     notes = Note.objects.all()
-    # notes = Note.newmanager.all()
+    
     context = {"notes": notes}
     return render(request, "notes/home.html", context)
 
@@ -89,21 +89,21 @@ def note_details(request, id):
 
 
 
-def important(request, id):
-    note = get_object_or_404(Note, id = id,  status='saved')
+def importants(request, id):
+    note = get_object_or_404(Note, id = id)
     if note.important.filter(id=request.user.id).exists():
         note.important.remove(request.user)
     else:
         note.important.add(request.user)
-    return HttpResponseRedirect(note.get_absolute_url())
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 
-def important_note(request):
+def importantslist(request):
     user = request.user
-    important = user.important.all()
-    context = {"important":important}
-    return render(request, "notes/important.html", context)
+    important_note = user.important.all()
+    context = {"important":important_note}
+    return render(request, "notes/importantslist.html", context)
 
 
 
