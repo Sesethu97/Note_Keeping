@@ -11,14 +11,14 @@
     
     {% for note in notes %}
     <div class="p-10 shadow-md border-2 border-black-600">
-      {% if is_important %}
+      {% if note.important %}
 
       <a href="/important/{{note.id}}/">
-        <span class="material-icons ml-20 "> star </span>
+        <span class="material-icons  "> star </span>
       </a>
       {% else %}
       <a href="/important/{{note.id}}/">
-        <span class="material-icons-outlined"> star_outline </span>
+        <span class="material-icons-outlined "> star_outline </span>
       </a>
       {% endif %}
       

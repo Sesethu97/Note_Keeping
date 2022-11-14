@@ -4,14 +4,13 @@
   <div class="p-20">
     <div class="p-10 shadow-md border-2 border-black-600">
       <div class="mb-5">
-        {% if is_important %}
-
-        <a href="/important/{{note.id}}/">
-          <span class="material-icons"> star </span>
+        {% if notes.important %}
+        <a href="/important/{{notes.id}}/">
+          <span class="material-icons">star</span>
         </a>
         {% else %}
-        <a href="/important/{{note.id}}/">
-          <span class="material-icons-outlined"> star_outline </span>
+        <a href="/important/{{notes.id}}/">
+          <span class="material-icons-outlined">star_outline</span>
         </a>
         {% endif %}
       </div>

@@ -14,8 +14,7 @@ def index(request):
 
 
 def home(request):
-    notes = Note.objects.all()
-    
+    notes = Note.objects.all() 
     context = {"notes": notes}
     return render(request, "notes/home.html", context)
 
@@ -79,30 +78,22 @@ def logout(request):
 
 def note_details(request, id):
     notes = Note.objects.get(id=id)
-    is_important = False
-    if notes.important.filter(id=request.user.id).exists():
-        is_important=True
-
-    context = {'notes': notes,
-    'is_important': is_important}
+    context = {'notes': notes}
     return render(request, "notes/note_details.html", context)
 
 
 
 def importants(request, id):
     note = get_object_or_404(Note, id = id)
-    if note.important.filter(id=request.user.id).exists():
-        note.important.remove(request.user)
-    else:
-        note.important.add(request.user)
+    note.important = not note.important
+    note.save()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 
-def importantslist(request):
-    user = request.user
-    important_note = user.important.all()
-    context = {"important":important_note}
+def importantslist(request):    
+    notes = Note.objects.filter(author=request.user, important=True) 
+    context = {"notes": notes}
     return render(request, "notes/importantslist.html", context)
 
 
@@ -129,7 +120,6 @@ def update(request, id):
 
 def delete(request, id):
     note_to_delete = Note.objects.get(id=id)
-
     note_to_delete.delete()
 
     return redirect("notes:home")
