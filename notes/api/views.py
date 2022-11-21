@@ -6,6 +6,8 @@ from .serialisers import NoteSerialiser, AccountSettingsFormSerializer, UserUpda
 from rest_framework.request import Request
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import UpdateAPIView, CreateAPIView
+
 
 
 
@@ -40,15 +42,13 @@ class RegisterAPIView(APIView):
 
 
 
-class SettingsAPIView(APIView):
-
-
+class SettingsAPIView(UpdateAPIView):
 
     queryset = User.objects.all()
     serializer_class = UserUpdateSerialiser
     permission_classes = [IsAuthenticated]
 
-    def update(self, request, *args, **kwargs):
+    def patch(self, request, *args, **kwargs):
         instance = User.objects.get(object_id=request.user.object_id)
         serialiser: UserUpdateSerialiser = self.get_serializer(
             instance, data=request.data, partial=True
@@ -63,4 +63,23 @@ class SettingsAPIView(APIView):
 
 
 
+class AddAPIView(CreateAPIView):
+    # queryset = Note.objects.all()
+    serializer_class = NoteSerialiser
+    
+    permission_classes = [IsAuthenticated]
+
+   
+    def create(self, serializer: NoteSerialiser):
+        user: User = self.request.user
+        user.posts += 1
+        user.save()
+        return serializer.save(author=user)
+
+    def create(self, request: Request, *args, **kwargs):
+        serialiser = self.get_serializer(data=request.data)
+        serialiser.is_valid(raise_exception=True)
+        instance = self.perform_create(serialiser)
+        instance_serialiser = NoteSerialiser(instance)
+        return Response(instance_serialiser.data)
 
