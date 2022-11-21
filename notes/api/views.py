@@ -2,11 +2,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from ..models import Note
-from .serialisers import NoteSerialiser, AccountSettingsFormSerializer, UserUpdateSerialiser
+from .serialisers import NoteSerialiser, AccountSettingsSerializer, UserUpdateSerialiser, NoteUpdateSerializer
 from rest_framework.request import Request
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import UpdateAPIView, CreateAPIView
+from rest_framework.generics import UpdateAPIView, CreateAPIView,RetrieveAPIView, ListAPIView
 
 
 
@@ -27,7 +27,7 @@ class RegisterAPIView(APIView):
             data = {"status_code": 403, "message": "You are already have an account"}
             return Response(data=data, status=status.HTTP_403_FORBIDDEN)
 
-        serialiser = AccountSettingsFormSerializer(data=request.data)
+        serialiser = AccountSettingsSerializer(data=request.data)
         if serialiser.is_valid():
             serialiser.save()
 
@@ -83,3 +83,8 @@ class AddAPIView(CreateAPIView):
         instance_serialiser = NoteSerialiser(instance)
         return Response(instance_serialiser.data)
 
+
+class DetailAPIView(RetrieveAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteUpdateSerializer
+    lookup_field = 'id'

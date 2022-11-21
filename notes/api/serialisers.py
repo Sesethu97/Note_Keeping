@@ -7,7 +7,8 @@ class NoteSerialiser(serializers.ModelSerializer):
         model = Note
         fields = ["title", "description", "draft", "saved"]
 
-class AccountSettingsFormSerializer(serializers.ModelSerializer):
+
+class AccountSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["username","email", "password"]
@@ -21,10 +22,10 @@ class AccountSettingsFormSerializer(serializers.ModelSerializer):
 
 
 
-class NoteUpdateFormSerializer(serializers.ModelSerializer):
+class NoteUpdateSerializer(serializers.ModelSerializer):
      class Meta:
         model = Note
-        fields = ["title", "description", "draft", "saved"]
+        fields = ["id", "title", "description", "draft", "saved"]
 
 
 class UserUpdateSerialiser(serializers.ModelSerializer):
@@ -35,3 +36,4 @@ class UserUpdateSerialiser(serializers.ModelSerializer):
             "password",
             "email",
         )
+    
