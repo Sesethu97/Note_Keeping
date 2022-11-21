@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 import django.contrib.auth.views as auth_views
 
@@ -26,4 +26,8 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("settings/", views.settings, name="settings"),
     path("delete/<int:id>/", views.delete, name="delete"),
+
+
+    # API routes
+    path("api/", include("notes.api.urls"))
 ]

@@ -6,9 +6,8 @@ from django.urls import reverse
 
 
 class Note(models.Model):
-
-    title = models.CharField(max_length=45, null=False)
     description = models.TextField(null=False)
+    title = models.CharField(max_length=45, null=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     draft = models.BooleanField(default=False)
     important = models.BooleanField(default=False)
