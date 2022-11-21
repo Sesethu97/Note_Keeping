@@ -5,7 +5,8 @@ from .views import (
     SettingsAPIView,
     AddAPIView,
     DetailAPIView,
-    UpdateAPIView
+    UpdateAPIView,
+    DeleteAPIView
 )
 from . import views
 
@@ -18,5 +19,7 @@ urlpatterns = [
     path("adds/", AddAPIView.as_view(), name="auth_add"),
     path("detail/<int:id>/", DetailAPIView.as_view(), name="auth_details"),
     path("updates/<int:id>/", UpdateAPIView.as_view(), name="auth_update"),
+    path("deleted/<int:id>/", DeleteAPIView.as_view(), name="auth_delete"),
+
 
 ]

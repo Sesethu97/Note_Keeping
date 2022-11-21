@@ -28,6 +28,13 @@ class NoteUpdateSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "description", "draft", "saved"]
 
 
+class UpdateSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Note
+        fields = ["id", "title", "description"]
+
+
+
 class UserUpdateSerialiser(serializers.ModelSerializer):
     class Meta:
         model = User
