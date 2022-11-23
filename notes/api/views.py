@@ -18,7 +18,9 @@ from rest_framework.generics import (
     RetrieveAPIView,
     ListAPIView,
     DestroyAPIView
+    
 )
+from django.db import models
 
 
 class HomeAPIView(APIView):
@@ -42,9 +44,7 @@ class RegisterAPIView(APIView):
             serialiser.save()
 
             username: str = serialiser.data.get("username")
-            token: str = self.login_user_after_register(username)
             data = {
-                "token": token,
                 "status_code": 201,
                 "message": "Successfully created your account",
             }
@@ -120,4 +120,39 @@ class DeleteAPIView(DestroyAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerialiser
     lookup_field = "id"
+
+class ImportantsAPIView(APIView):
+    # queryset = Note.objects.all()
+    # serializer_class = NoteSerialiser
+
+    def post(self, request: Request, pk):
+        note = Note.objects.get(id=pk)
+        note.important = not note.important
+        note.save()
+        return Response({"yes": "done"}, status=status.HTTP_200_OK)
+
+class ImportantListsAPIView(APIView):
+    def get(self, request):
+        notes = Note.objects.filter(author=request.user, important=True)
+        serialiser = NoteSerialiser(notes, many=True)
+        return Response(serialiser.data, status=status.HTTP_200_OK)
+       
+
+
+
+class LogInAPIView(APIView):
+    serializer_class = AccountSettingsSerializer
+    # permission_classes = [IsAuthenticated]
+
+    def post(self, request: Request, *args, **kwargs):
+        """
+        Handles post request
+        """
+        data = request.data
+        serialiser = AccountSettingsSerializer(data=data)
+
+        if serialiser.is_valid(raise_exception=True):
+            new_data = serialiser.data
+            return Response(new_data, status=status.HTTP_200_OK)
+        return Response(serialiser.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -6,10 +6,12 @@ from .views import (
     AddAPIView,
     DetailAPIView,
     UpdateAPIView,
-    DeleteAPIView
+    DeleteAPIView,
+    ImportantsAPIView,
+    ImportantListsAPIView,
+    LogInAPIView,
 )
 from . import views
-
 
 
 urlpatterns = [
@@ -20,6 +22,12 @@ urlpatterns = [
     path("detail/<int:id>/", DetailAPIView.as_view(), name="auth_details"),
     path("updates/<int:id>/", UpdateAPIView.as_view(), name="auth_update"),
     path("deleted/<int:id>/", DeleteAPIView.as_view(), name="auth_delete"),
-
+    path("importants/<int:id>/", ImportantsAPIView.as_view(), name="auth_importants"),
+    path(
+        "importantlists/",
+        ImportantListsAPIView.as_view(),
+        name="auth_importantLists",
+    ),
+    path("logins/",LogInAPIView.as_view(),name="auth_login" ),
 
 ]
