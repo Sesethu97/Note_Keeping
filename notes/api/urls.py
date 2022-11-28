@@ -9,13 +9,13 @@ from .views import (
     DeleteAPIView,
     ImportantsAPIView,
     ImportantListsAPIView,
-    LogInAPIView,
+    # LogInAPIView,
 )
 from . import views
 
 
 urlpatterns = [
-    path("homes/", HomeAPIView.as_view(), name="home"),
+    path("homes/", HomeAPIView.as_view(), name="auth_homes"),
     path("registers/", RegisterAPIView.as_view(), name="auth_register"),
     path("setting/", SettingsAPIView.as_view(), name="auth_settings"),
     path("adds/", AddAPIView.as_view(), name="auth_add"),
@@ -28,6 +28,6 @@ urlpatterns = [
         ImportantListsAPIView.as_view(),
         name="auth_importantLists",
     ),
-    path("logins/",LogInAPIView.as_view(),name="auth_login" ),
+    # path("logins/",LogInAPIView.as_view(),name="auth_login" ),
 
 ]

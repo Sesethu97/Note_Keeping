@@ -24,6 +24,10 @@ from django.db import models
 
 
 class HomeAPIView(APIView):
+
+  
+
+
     def get(self, request):
         notes = Note.objects.all()
         serialiser = NoteSerialiser(notes, many=True)
@@ -122,8 +126,7 @@ class DeleteAPIView(DestroyAPIView):
     lookup_field = "id"
 
 class ImportantsAPIView(APIView):
-    # queryset = Note.objects.all()
-    # serializer_class = NoteSerialiser
+   
 
     def post(self, request: Request, pk):
         note = Note.objects.get(id=pk)
@@ -140,19 +143,5 @@ class ImportantListsAPIView(APIView):
 
 
 
-class LogInAPIView(APIView):
-    serializer_class = AccountSettingsSerializer
-    # permission_classes = [IsAuthenticated]
-
-    def post(self, request: Request, *args, **kwargs):
-        """
-        Handles post request
-        """
-        data = request.data
-        serialiser = AccountSettingsSerializer(data=data)
-
-        if serialiser.is_valid(raise_exception=True):
-            new_data = serialiser.data
-            return Response(new_data, status=status.HTTP_200_OK)
-        return Response(serialiser.errors, status=status.HTTP_400_BAD_REQUEST)
-
+# class LogInAPIView(APIView):
+#     ...
